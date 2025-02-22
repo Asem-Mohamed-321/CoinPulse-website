@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/coinProfile.css" rel="stylesheet">
+    <!-- font : -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top ">
+        <div class="container-fluid jus">
+            <a href="#" id="logo">logo img</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="#">Coins</a>
+                    <a class="nav-link" href="#">Exchanges</a>
+                    <a class="nav-link" href="#">Contact us</a>
+                    <a class="nav-link" href="#">CoinCapPro</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- first div (coin info) -->
+    <div class="firstDiv h-20 container pt-5" >
+        <div class="row">
+            <div class="offset-3 col-3 col-md-1 col-sm-2  offset-md-2 ">
+                <!-- rank image -->
+                <img src="../images/9143368.png" id="rankImg" class="img-fluid">  <!--this class makes it take the width of the column-->
+            </div>
+            <div class=" col-2">
+                <h3>Bitcoin (BTC)</h3>
+                <p>$96,333.10  -2.02%</p>
+            </div>
+            <div class="col-3 offset-3 offset-md-0  col-md-2">
+                <p>Market Cap</p>
+                <p><b>$1.91t</b></p>
+                <input type="button" value="Website" class="btn btn-primary">
+            </div>
+            <div class="col-2 offset-md-0 offset-1">
+                <p>Volume (24Hr)</p>
+                <p><b>$12.12b</b></p>
+                <input type="button" value="Explorer" class="btn btn-primary">
+            </div>
+            <div class="col-1 offset-1 offset-md-0" id="disappearsmall">
+                <p>Supply</p>
+                <p><b>19.83m BTC</b></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- chart div -->
+    <div id="chart" class="container mx-auto">
+        <div class="row align-middle">
+            <div class="offset-3 offset-md-0 col-1">
+                <img src="../images/bitcoin-btc-logo.png" >
+            </div>
+
+            <div class="  col-8 col-md-3 d-md-inline d-inline ">
+                <p class="h3">Bitcoin(BTC)</p>
+                <p>17 February 2025</p>
+            </div>
+            
+
+            <div class="offset-2 offset-md-0 col-4">
+                <p class="h5">HIGH $97,183.78</p>
+                <p class="h5">LOW $95,296.54</p>
+            </div>
+
+            <div class="col-4 ">
+                <p class="h5">AVERAGE $96,271.68</p>
+                <p class="h5">CHANGE -0.83%</p>
+            </div>
+
+        </div>
+        <div class="row">
+            <img src="../images/test.PNG" class="img-fluid">
+        </div>
+    </div>
+    
+
+    <!-- table -->
+    <div id="table-part" class="container table-responsive">
+        <table class="table table-bordered align-middlle">
+            <thead  class="table-light">
+                <tr>
+                    <th scope="col">Exchange</th>
+                    <th scope="col" class="d-none d-sm-table-cell">Pair</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Volume(24Hr)</th>
+                    <th scope="col" class="d-none d-sm-table-cell">Volume(%)</th>
+                    <th scope="col" class="d-none d-sm-table-cell">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Binance</td>
+                    <td class="d-none d-sm-table-cell">BTC/USD</td>
+                    <td>96,229.98$</td>
+                    <td>934,710,698</td>
+                    <td class="d-none d-sm-table-cell">24.92%</td>
+                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
+                </tr>
+                <tr>
+                    <td>Binance</td>
+                    <td class="d-none d-sm-table-cell">BTC/USD</td>
+                    <td>96,229.98$</td>
+                    <td>934,710,698</td>
+                    <td class="d-none d-sm-table-cell">24.92%</td>
+                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
+                </tr>
+                <tr>
+                    <td>Binance</td>
+                    <td class="d-none d-sm-table-cell">BTC/USD</td>
+                    <td>96,229.98$</td>
+                    <td>934,710,698</td>
+                    <td class="d-none d-sm-table-cell">24.92%</td>
+                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
+                </tr>
+                <tr>
+                    <td>Binance</td>
+                    <td class="d-none d-sm-table-cell">BTC/USD</td>
+                    <td>96,229.98$</td>
+                    <td>934,710,698</td>
+                    <td class="d-none d-sm-table-cell">24.92%</td>
+                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
+                </tr>
+                <tr>
+                    <td>Binance</td>
+                    <td class="d-none d-sm-table-cell">BTC/USD</td>
+                    <td>96,229.98$</td>
+                    <td>934,710,698</td>
+                    <td class="d-none d-sm-table-cell">24.92%</td>
+                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <br>
+        <div class="justify-content-center">
+            <input type="button" value="View more" class="btn btn-primary mx-auto d-block">
+        </div>
+        <br><br>
+    
+
+        <!-- footer -->
+        <footer class="h-50 p-5">
+            <div class="container mx-auto">
+                <div class="row align-middle">
+                    <div class="col-2 offset-2">
+                        <h5>CoinPulse.com</h5>
+                        <a href="#">Methodology</a>
+                        <a href="#">Support(Discord)</a>
+                        <a href="#">Our API</a>
+                    </div>
+                    <div class="col-2">
+                        <h5>LEGALS</h5>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                    <div class="col-2">
+                        <h5>CONNECT WITH US</h5>
+                        <a href="#" id="footer-a">
+                            <img src="../images/discord.png" >
+                        </a>
+                        &nbsp;
+                        <a href="#" id="footer-a">
+                            <img src="../images/x.png" >
+                        </a>
+                    </div>
+
+                    <div class="col-2">
+                        <h5>CoinPulse APP</h5>
+                        <a href="#">
+                            <img src="../images/g2.png" id="footer-pic1">
+                        </a>
+                        <br>
+                        <a href="#">
+                            <img src="../images/app2.png" id="footer-pic2">
+                        </a>
+                    </div>
+            </div>
+            <br><br>
+        </div>
+        </footer>
+</body>
+</htm>
