@@ -9,7 +9,7 @@
 <body>
       <!-- navbar -->
       <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top ">
-        <div class="container-fluid jus">
+        <div class="container-fluid ">
             <a href="#" id="logo">logo img</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -17,8 +17,8 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="#">Coins</a>
-                    <a class="nav-link" href="#">Exchanges</a>
+                    <a class="nav-link" href="./main.html">Coins</a>
+                    <a class="nav-link" href="./converter.html">Exchanges</a>
                     <a class="nav-link" href="#">Contact us</a>
                     <a class="nav-link" href="#">CoinCapPro</a>
                 </div>
@@ -59,17 +59,66 @@
                   
 
                     <div class="row">
-                      <button type="button" class="btn btn-primary mt-4" onclick="convertToUsd()">Convert</button>
+                      <button type="button" class="btn btn-primary mt-4" onclick="convert()">Convert</button>
                     </div>
-
+                    <div class="row mt-4" id="res">
+                      <p class="" id="result"> Convertion Rate: </p>
+                    </div>
                     
 
 
                 </form>
             </div>
         </div>
-      </div>
 
+
+      
+
+        
+        <div class="container d-flex flex-column justify-content-center align-items-center">
+          <div class="row mt-5">
+            <h3>Popular Cryptocurrency <a class="primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+              Conversions
+            </a></h3>
+            
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Convert Currency</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <div>
+                  Choose the default Currency.
+                </div>
+                <div class="dropdown mt-3">
+                  <select class="form-select" id="convertSelect">
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+          </div>
+
+          <div class="row mt-1 primary" id="conversions">
+            
+            <!--
+              <input type="text" class="form-control rounded-pill" value="1 BTCU | 1 dollars" disabled>
+              input fields here
+            -->
+          </div>
+        </div>
+
+
+      </div>
+        
 
       <script src="../vendor/bootstrap/js/bootstrap.bundle.js"></script>
       <script type="module" src="../js/cryptoApi.js"></script>
