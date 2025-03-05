@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+      <!-- navbar -->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top ">
+        <div class="container-fluid ">
+            <a href="#" id="logo">logo img</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="./main.html">Coins</a>
+                    <a class="nav-link" href="./converter.html">Exchanges</a>
+                    <a class="nav-link" href="#">Contact us</a>
+                    <a class="nav-link" href="#">CoinCapPro</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+        <h3 class="mb-4 text-center">Cryptocurrency Converter Calculater</h3>
+        <div class="card shadow-lg" style="max-width:600px; width: 100%;">
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" id="amount" class="form-control" value="0">
+                    </div>
+
+                    <div class="row g-3 align-items-center">
+                      <div class="col-md-6">
+                          <label for="fromCurrency" class="form-label">From</label>
+                          <select id="fromCurrency" class="form-select">
+                          </select>
+                      </div>
+
+                      <!--
+                      <div class="col-md-2 d-flex justify-content-center">
+                        <button class="btn btn-outline-primary mt-4" data-bs-target="#fromCurrency, #toCurrency" onclick="">⇄</button>
+                      </div>
+                      -->
+
+                      <div class="col-md-6">
+                        <label for="toCurrency" class="form-label">To</label>
+                        <select id="toCurrency" class="form-select">
+                        </select>
+                      </div>
+                    </div>
+
+                  
+
+                    <div class="row">
+                      <button type="button" class="btn btn-primary mt-4" onclick="convert()">Convert</button>
+                    </div>
+                    <div class="row mt-4" id="res">
+                      <p class="" id="result"> Convertion Rate: </p>
+                    </div>
+                    
+
+
+                </form>
+            </div>
+        </div>
+
+
+      
+
+        
+        <div class="container d-flex flex-column justify-content-center align-items-center">
+          <div class="row mt-5">
+            <h3>Popular Cryptocurrency <a class="primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+              Conversions
+            </a></h3>
+            
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Convert Currency</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <div>
+                  Choose the default Currency.
+                </div>
+                <div class="dropdown mt-3">
+                  <select class="form-select" id="convertSelect">
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+          </div>
+
+          <div class="row mt-1 primary" id="conversions">
+            
+            <!--
+              <input type="text" class="form-control rounded-pill" value="1 BTCU | 1 dollars" disabled>
+              input fields here
+            -->
+          </div>
+        </div>
+
+
+      </div>
+        
+
+      <script src="../vendor/bootstrap/js/bootstrap.bundle.js"></script>
+      <script type="module" src="../js/cryptoApi.js"></script>
+      
+</body>
+</html>
