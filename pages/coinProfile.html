@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <script src="../js/coinProfile.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> <!--cdn for js library for charts (Chart.js is a free JavaScript library for making HTML-based charts.)--> 
+
 </head>
 <body>
     <!-- navbar -->
@@ -22,7 +25,7 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="#">Coins</a>
+                    <a class="nav-link" href="../pages/main.html">Coins</a>
                     <a class="nav-link" href="#">Exchanges</a>
                     <a class="nav-link" href="#">Contact us</a>
                     <a class="nav-link" href="#">CoinCapPro</a>
@@ -39,22 +42,22 @@
                 <img src="../images/9143368.png" id="rankImg" class="img-fluid">  <!--this class makes it take the width of the column-->
             </div>
             <div class=" col-2">
-                <h3>Bitcoin (BTC)</h3>
-                <p>$96,333.10  -2.02%</p>
+                <h3 id="CoinName"></h3>
+                <p id="CoinPriceAndChange"></p>
             </div>
             <div class="col-3 offset-3 offset-md-0  col-md-2">
                 <p>Market Cap</p>
-                <p><b>$1.91t</b></p>
-                <input type="button" value="Website" class="btn btn-primary">
+                <p id="CoinMarketCap"></p>
+                <input type="button" id="CoinWebsite" value="Website" class="btn btn-primary">
             </div>
             <div class="col-2 offset-md-0 offset-1">
                 <p>Volume (24Hr)</p>
-                <p><b>$12.12b</b></p>
-                <input type="button" value="Explorer" class="btn btn-primary">
+                <p id="CoinVolume24"></p>
+                <input type="button" id="CoinExplorer" value="Explorer" class="btn btn-primary">
             </div>
             <div class="col-1 offset-1 offset-md-0" id="disappearsmall">
                 <p>Supply</p>
-                <p><b>19.83m BTC</b></p>
+                <p id="CoinSupply"><b>19.83m BTC</b></p>
             </div>
         </div>
     </div>
@@ -68,23 +71,36 @@
 
             <div class="  col-8 col-md-3 d-md-inline d-inline ">
                 <p class="h3">Bitcoin(BTC)</p>
-                <p>17 February 2025</p>
+                <p id="DATE"></p>
             </div>
             
 
             <div class="offset-2 offset-md-0 col-4">
-                <p class="h5">HIGH $97,183.78</p>
-                <p class="h5">LOW $95,296.54</p>
+                <p class="h5" id="HIGH"></p>
+                <p class="h5" id="LOW"></p>
             </div>
 
             <div class="col-4 ">
-                <p class="h5">AVERAGE $96,271.68</p>
-                <p class="h5">CHANGE -0.83%</p>
+                <p class="h5" id="AVG"></p>
+                <p class="h5" id="CHANGE"></p>
             </div>
 
+            <!-- chart : -->
         </div>
         <div class="row">
-            <img src="../images/test.PNG" class="img-fluid">
+            <canvas id="myChart" ></canvas>
+
+        </div>
+        <div class=" justify-content-center d-flex">
+            <!-- buttons display diferent periods to the graph -->
+            <input type="button" id="defaultbtn" value="1D" class="btn btn-primary mx-2" onclick="newDisplay('h1',24)">
+            <input type="button" value="1W" class="btn btn-primary mx-2" onclick="newDisplay('h2',24*7)">
+            <input type="button" value="1M" class="btn btn-primary mx-2" onclick="newDisplay('d1',24*30)"> 
+            <input type="button" value="3M" class="btn btn-primary mx-2" onclick="newDisplay('d1',24*30*3)">
+            <input type="button" value="6M" class="btn btn-primary mx-2" onclick="newDisplay('d1',24*30*6)">
+            <input type="button" value="1Y" class="btn btn-primary mx-2" onclick="newDisplay('d1',24*30*12)">
+
+
         </div>
     </div>
     
@@ -95,61 +111,21 @@
             <thead  class="table-light">
                 <tr>
                     <th scope="col">Exchange</th>
-                    <th scope="col" class="d-none d-sm-table-cell">Pair</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">Trading pairs</th>
                     <th scope="col">Volume(24Hr)</th>
                     <th scope="col" class="d-none d-sm-table-cell">Volume(%)</th>
                     <th scope="col" class="d-none d-sm-table-cell">Status</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Binance</td>
-                    <td class="d-none d-sm-table-cell">BTC/USD</td>
-                    <td>96,229.98$</td>
-                    <td>934,710,698</td>
-                    <td class="d-none d-sm-table-cell">24.92%</td>
-                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
-                </tr>
-                <tr>
-                    <td>Binance</td>
-                    <td class="d-none d-sm-table-cell">BTC/USD</td>
-                    <td>96,229.98$</td>
-                    <td>934,710,698</td>
-                    <td class="d-none d-sm-table-cell">24.92%</td>
-                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
-                </tr>
-                <tr>
-                    <td>Binance</td>
-                    <td class="d-none d-sm-table-cell">BTC/USD</td>
-                    <td>96,229.98$</td>
-                    <td>934,710,698</td>
-                    <td class="d-none d-sm-table-cell">24.92%</td>
-                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
-                </tr>
-                <tr>
-                    <td>Binance</td>
-                    <td class="d-none d-sm-table-cell">BTC/USD</td>
-                    <td>96,229.98$</td>
-                    <td>934,710,698</td>
-                    <td class="d-none d-sm-table-cell">24.92%</td>
-                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
-                </tr>
-                <tr>
-                    <td>Binance</td>
-                    <td class="d-none d-sm-table-cell">BTC/USD</td>
-                    <td>96,229.98$</td>
-                    <td>934,710,698</td>
-                    <td class="d-none d-sm-table-cell">24.92%</td>
-                    <td class="d-none d-sm-table-cell"><img src="../images/icons8-red-circle-48.png"></td>
-                </tr>
+                
             </tbody>
         </table>
     </div>
 
         <br>
         <div class="justify-content-center">
-            <input type="button" value="View more" class="btn btn-primary mx-auto d-block">
+            <input type="button" id="viewMore" value="View more" class="btn btn-primary mx-auto d-block" onclick="viewMore()">
         </div>
         <br><br>
     

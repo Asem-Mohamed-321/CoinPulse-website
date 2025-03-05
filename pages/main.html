@@ -7,6 +7,8 @@
     <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="../css/main.css" rel="stylesheet">
     <script src="../js/main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> <!--cdn for js library for charts (Chart.js is a free JavaScript library for making HTML-based charts.)--> 
+
 
 </head>
 <body>
@@ -60,29 +62,20 @@
                 <table class="table table-bordered align-middlle w-100 m-0">
                     <thead  class="table-light">
                         <tr>
-                            <td scope="col" class="d-none d-sm-table-cell">Rank</td>
+                            <td scope="col" class="d-none d-md-table-cell">Rank</td>
                             <th scope="col">Name</th>
                             <th scope="col">Price</th>
-                            <th scope="col" class="d-none d-sm-table-cell">Market Cap</th>
-                            <th scope="col" class="d-none d-sm-table-cell">VWAP(24Hr)</th>
-                            <th scope="col" class="d-none d-sm-table-cell">Supply</th>
-                            <th scope="col" class="d-none d-sm-table-cell">Volume(24Hr)</th>
+                            <th scope="col" class="d-none d-md-table-cell">Market Cap</th>
+                            <th scope="col" class="d-none d-md-table-cell">VWAP(24Hr)</th>
+                            <th scope="col" class="d-none d-md-table-cell">Supply</th>
+                            <th scope="col" class="d-none d-md-table-cell">Volume(24Hr)</th>
                             <th scope="col">Change(24Hr)</th>
                         </tr>
                     </thead>
                     <tbody>
+                        
                         <!-- <tr>
                             <td>1</td>
-                            <td><a href="coinProfile.html">Bitcoin</a></td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
                             <td>Bitcoin</td>
                             <td>$95,474.45</td>
                             <td class="d-none d-sm-table-cell">$96,385.39</td>
@@ -90,134 +83,16 @@
                             <td class="d-none d-sm-table-cell">19.83m</td>
                             <td class="d-none d-sm-table-cell">$4.12b</td>
                             <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Bitcoin</td>
-                            <td>$95,474.45</td>
-                            <td class="d-none d-sm-table-cell">$96,385.39</td>
-                            <td class="d-none d-sm-table-cell">$1.89t</td>
-                            <td class="d-none d-sm-table-cell">19.83m</td>
-                            <td class="d-none d-sm-table-cell">$4.12b</td>
-                            <td >-1.25%</td>
-                        </tr> -->
+                        </tr>  -->
                         
                     </tbody>
                 </table>
             </div>
             <br>
-            <div class="justify-content-center">
-                <input type="button" value="View more" class="btn btn-primary mx-auto d-block">
+            <div class="justify-content-center d-flex">
+                <input type="button" id="viewMore" value="View more" class="btn btn-primary mx-2 " onclick="viewMore()">
+                <input type="button" disabled id="viewLess" value="View less" class="btn btn-primary mx-2 " onclick="viewLess()">
+
             </div>
             <br><br>
         </div>
@@ -235,18 +110,28 @@
     <footer class="h-50 p-5">
         <div class="container mx-auto">
             <div class="row align-middle">
-                <div class="col-2 offset-2">
+                <div class="col-2 offset-0 offset-lg-2 d-block d-lg-none">
+                    <h5>CoinPulse.com</h5>
+                    <a href="#">Methodology</a>
+                    <a href="#">Support(Discord)</a>
+                    <a href="#">Our API</a>
+                    <br>
+                    <h5>LEGALS</h5>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="col-2 offset-0 offset-lg-2 d-none d-lg-block">
                     <h5>CoinPulse.com</h5>
                     <a href="#">Methodology</a>
                     <a href="#">Support(Discord)</a>
                     <a href="#">Our API</a>
                 </div>
-                <div class="col-2">
+                <div class="col-2 d-none d-lg-block">
                     <h5>LEGALS</h5>
                     <a href="#">Terms of Service</a>
                     <a href="#">Privacy Policy</a>
                 </div>
-                <div class="col-2">
+                <div class="col-2 offset-2 offset-lg-0">
                     <h5>CONNECT WITH US</h5>
                     <a href="#" id="footer-a">
                         <img src="../images/discord.png" >
@@ -257,7 +142,7 @@
                     </a>
                 </div>
 
-                <div class="col-2">
+                <div class="col-2 offset-2 offset-lg-0">
                     <h5>CoinPulse APP</h5>
                     <a href="#">
                         <img src="../images/g2.png" id="footer-pic1">
@@ -267,7 +152,7 @@
                         <img src="../images/app2.png" id="footer-pic2">
                     </a>
                 </div>
-        </div>
+            </div>
         <br><br>
     </div>
     </footer>
