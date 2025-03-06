@@ -1,9 +1,18 @@
+let coin; //this is the passed coin id from the calling page
+let coindata ; //will store the info about the coin here when fetched
+
 onload =function(){
+    const params = new URLSearchParams(window.location.search); //this is a js library that makes it easier to work with query parameters in a URL.
+    coin = params.get("coin")
+
+
     
     this.document.getElementById("defaultbtn").click(); //shows the default chart of 1 day 
     this.document.getElementById("DATE").innerHTML=`${(new Date).toLocaleString()}`
 
-    DesplayCoinInfo("bitcoin");//hardcoded for now
+    
+
+    DisplayCoinInfo(coin);
     ExchangeTable();
 
 }
@@ -14,8 +23,11 @@ let rows = 10;
 
 let myChart = null; // Global variable to store the Chart instance so we can check if it exist before creating new charts to avoid errors
 
-
+function test(){
+    console.log("this is the function test")
+}
 function displayChart(url){
+    // console.log("called")
 
     let yData = [];
     let xData = [];
@@ -70,6 +82,7 @@ function displayChart(url){
 
 
             //fill data top of the chart
+            document.getElementById("coinNameInfo").innerHTML=`${coindata.data.name}(${coindata.data.symbol})`
             document.getElementById("HIGH").innerHTML=`HIGH &nbsp; ${formatCurrency(Math.max(...yData).toString())}`
             document.getElementById("LOW").innerHTML=`LOW &nbsp; ${formatCurrency(Math.min(...yData))}`
             let total=0;
@@ -100,8 +113,8 @@ function newDisplay(intervalPassed,startTime){
     let start = (end - (startTime*60*60*1000)).toString();              // before certain time hours
     console.log(start)
     console.log(end)
-    let url = "https://api.coincap.io/v2/assets/bitcoin/history?interval="+interval+"&start="+start+"&end="+end;
-    console.log(url)
+    let url = "https://api.coincap.io/v2/assets/"+coin+"/history?interval="+interval+"&start="+start+"&end="+end;
+    // console.log(url)
     displayChart(url)
 
 }
@@ -135,16 +148,19 @@ let formatImpact = function (fetchedString){
 
 
 
-function DesplayCoinInfo(coin){
+function DisplayCoinInfo(coin){
     let url="https://api.coincap.io/v2/assets/"+coin
+    console.log(url)
     let a =fetch(url)
     a.then((data)=>{
         let j = data.text()
         j.then((p)=>{
             let parsed=JSON.parse(p)
+            coindata = parsed ;
             console.log(parsed)
 
             //fills the data on top
+
             document.getElementById("CoinName").innerHTML=parsed.data.name+" ("+parsed.data.symbol+")"
             document.getElementById("CoinPriceAndChange").innerHTML=formatCurrency(parsed.data.priceUsd)+`&nbsp; &nbsp; &nbsp;`+formatPrecentage(parsed.data.changePercent24Hr)
             document.getElementById("CoinMarketCap").innerHTML=`<b>${formatImpact(parsed.data.marketCapUsd)}</b>`
