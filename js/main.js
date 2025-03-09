@@ -2,6 +2,7 @@ let rows=20; //number of displayed rows
 let t = document.getElementsByTagName("tbody")[0];
 let coinExpanded = false ;
 let coinsdata;
+let logosJson;
 
 let updateTable = function(updateStart=0){    //takes the first row to be updated
     // for (let i=0;i<t.children.length;i++){
@@ -14,34 +15,51 @@ let updateTable = function(updateStart=0){    //takes the first row to be update
         j.then((p) => {
             let parsed = JSON.parse(p);
             coinsdata = parsed; // passing the data to a global variable to use it in different functions
-            for(i=updateStart;i<rows;i++){
-                // document.getElementsByTagName("p")[0].innerHTML= document.getElementsByTagName("p")[0].innerHTML +"<br>"+ parsed.data[k]["id"];
-                var r = t.appendChild(document.createElement("tr"));
-                r.addEventListener("click", expandCoin )
-                var d = r.appendChild(document.createElement("td"));
-                d.appendChild(document.createTextNode(parsed.data[i]["rank"]));
-                d.classList.add("d-none","d-md-table-cell");
-                var d = r.appendChild(document.createElement("td"));
-                // d.appendChild(document.createTextNode(`<a>${parsed.data[i]["id"]}</a>`));
-                d.innerHTML=`<a href="../pages/coinProfile.html?coin=${parsed.data[i]["id"]}">${parsed.data[i]["id"]}</a>`
-                var d = r.appendChild(document.createElement("td"));
-                d.appendChild(document.createTextNode(formatCurrency(parsed.data[i]["priceUsd"])))
-                var d = r.appendChild(document.createElement("td"));
-                d.appendChild(document.createTextNode(formatImpact(parsed.data[i]["marketCapUsd"])));
-                d.classList.add("d-none","d-md-table-cell");
-                var d = r.appendChild(document.createElement("td"));
-                d.appendChild(document.createTextNode(formatCurrency(parsed.data[i]["vwap24Hr"])));
-                d.classList.add("d-none","d-md-table-cell");
-                var d = r.appendChild(document.createElement("td"));
-                d.appendChild(document.createTextNode(formatImpact(parsed.data[i]["supply"])));
-                d.classList.add("d-none","d-md-table-cell");
-                var d = r.appendChild(document.createElement("td"));
-                d.appendChild(document.createTextNode(formatImpact(parsed.data[i]["volumeUsd24Hr"])));
-                d.classList.add("d-none","d-md-table-cell");
-                var d = r.appendChild(document.createElement("td"));
-                d.appendChild(document.createTextNode(formatPrecentage(parsed.data[i]["changePercent24Hr"])));
-            }
-            // console.log(parsed[0])
+            // let logosJson;
+            let logosPromise = fetch("../json/logos.json")
+            logosPromise.then((logos)=>{
+                let logosText = logos.text();
+                logosText.then((l)=> {
+                    logosJson=JSON.parse(l)
+
+                    for(i=updateStart;i<rows;i++){
+                        // document.getElementsByTagName("p")[0].innerHTML= document.getElementsByTagName("p")[0].innerHTML +"<br>"+ parsed.data[k]["id"];
+                        var r = t.appendChild(document.createElement("tr"));
+                        r.addEventListener("click", expandCoin )
+                        var d = r.appendChild(document.createElement("td"));
+                        d.appendChild(document.createTextNode(parsed.data[i]["rank"]));
+                        d.classList.add("d-none","d-md-table-cell");
+                        var d = r.appendChild(document.createElement("td"));
+                        // d.appendChild(document.createTextNode(`<a>${parsed.data[i]["id"]}</a>`));
+                        // console.log(`../pages/coinProfile.html?coin=${parsed.data[i]["id"]}`.onerror)
+                        d.innerHTML=`
+                        <img src="${logosJson[parsed.data[i].symbol]}" onerror="this.src='../images/logos/symbol/not-found.png'">
+                        <a href="../pages/coinProfile.html?coin=${parsed.data[i]["id"]}">${parsed.data[i]["id"]}</a>`
+                        
+                        
+                        var d = r.appendChild(document.createElement("td"));
+                        d.appendChild(document.createTextNode(formatCurrency(parsed.data[i]["priceUsd"])))
+                        var d = r.appendChild(document.createElement("td"));
+                        d.appendChild(document.createTextNode(formatImpact(parsed.data[i]["marketCapUsd"])));
+                        d.classList.add("d-none","d-md-table-cell");
+                        var d = r.appendChild(document.createElement("td"));
+                        d.appendChild(document.createTextNode(formatCurrency(parsed.data[i]["vwap24Hr"])));
+                        d.classList.add("d-none","d-md-table-cell");
+                        var d = r.appendChild(document.createElement("td"));
+                        d.appendChild(document.createTextNode(formatImpact(parsed.data[i]["supply"])));
+                        d.classList.add("d-none","d-md-table-cell");
+                        var d = r.appendChild(document.createElement("td"));
+                        d.appendChild(document.createTextNode(formatImpact(parsed.data[i]["volumeUsd24Hr"])));
+                        d.classList.add("d-none","d-md-table-cell");
+                        var d = r.appendChild(document.createElement("td"));
+                        d.appendChild(document.createTextNode(formatPrecentage(parsed.data[i]["changePercent24Hr"])));
+                    }
+                    // console.log(parsed[0])
+
+            })
+            })
+            // console.log(logosJson)
+            
         })
     }).catch((err) => console.log(err));
 }
@@ -112,18 +130,21 @@ let formatPrecentage = function (fetchedString){
 
 
 // saved data of the open coin info .. because it will be used to check to close the current info
-//name symbol and logo 
+//name symbol and logo
 let coinId;
 let coinName ;
-let coinSymbol ; 
+let coinSymbol ;
 //let coinlogo ;                                       ///////////////////////////////////
 
 
 function expandCoin(){
 
     
-    let coin = this.querySelectorAll('td')[1].innerText;
-    console.log(coin)
+    let coin = this.querySelectorAll('a')[0].innerText;
+    let coinImage = this.querySelectorAll('img')[0].cloneNode(true);
+    coinImage.classList.add("mx-sm-0", "mx-md-2", "mx-lg-3", "mx-4")
+    
+    console.log(coinImage )
 
     
 
@@ -160,15 +181,15 @@ function expandCoin(){
                 
 
 
-                break ; 
+                break ;
             }
         }
 
         td.innerHTML=`
         <div id="chart" class="container mx-auto">
             <div class="row align-middle">
-                <div class="offset-3 offset-md-0 col-1">
-                    <img src="../images/bitcoin-btc-logo.png" >
+                <div class="offset-3 offset-md-0 col-1  mx-auto">
+                    ${coinImage.outerHTML}
                 </div>
 
                 <div class="  col-8 col-md-3 d-md-inline d-inline ">

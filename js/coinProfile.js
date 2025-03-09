@@ -159,6 +159,15 @@ function DisplayCoinInfo(coin){
             coindata = parsed ;
             console.log(parsed)
 
+            //the logo:
+            let logosPromise = fetch("../json/logos.json")
+            logosPromise.then((logos)=>{
+                let logosText = logos.text();
+                logosText.then((l)=> {
+                let logosJson=JSON.parse(l)
+                document.getElementById("coinImageInfo").innerHTML=`<img src="${logosJson[parsed.data.symbol]}" onerror="this.src='../images/logos/symbol/not-found.png'">`
+            })})
+
             //fills the data on top
 
             document.getElementById("CoinName").innerHTML=parsed.data.name+" ("+parsed.data.symbol+")"

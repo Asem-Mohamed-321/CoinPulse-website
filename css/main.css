@@ -116,7 +116,10 @@ a img{
 
 tr img{
     height: 100%;
-    width: auto !important;
+    /* width: 4%; */
+    /* max-width: 50px; Limit the maximum width */
+    max-height: 30px; 
+    /* min-width: 20px; */
 }
 tr a{
     color: black;
@@ -144,10 +147,8 @@ table{
 
 
 #chart img{
-    width: 80%;
-    padding: 0.5%;
-    margin: auto;
-    max-width: 100%;
+    height: auto;
+    max-height: 45px;
 }
 
 #chart p{
