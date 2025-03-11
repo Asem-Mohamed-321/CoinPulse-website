@@ -1,0 +1,9 @@
+.glow-green {
+    background-color: rgba(0, 255, 0, 0.5) !important;
+    transition: background-color 1s ease-out;
+}
+
+.glow-red {
+    background-color: rgba(255, 0, 0, 0.5) !important;
+    transition: background-color 5s ease-out;
+}

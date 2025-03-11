@@ -138,7 +138,7 @@ table{
 #table-part{
     margin: 0%;
     padding: 0%;
-    /* background-color: aliceblue; */
+    background-color: white;
     max-width: 100%;
 
 }
@@ -153,4 +153,16 @@ table{
 
 #chart p{
     color:black;
+}
+
+
+
+.glow-green {
+    background-color: rgba(0, 255, 0, 0.3) !important;
+    transition: background-color 1s ease-out;
+}
+
+.glow-red {
+    background-color: rgba(255, 0, 0, 0.3) !important;
+    transition: background-color 1s ease-out;
 }

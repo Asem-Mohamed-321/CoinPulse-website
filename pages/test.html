@@ -6,15 +6,49 @@
     <title>Document</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> <!--cdn for js library for charts (Chart.js is a free JavaScript library for making HTML-based charts.)--> 
-
+    <link href="../css/test.css" rel="stylesheet">
 
 </head>
 <body>
     <p></p>
     <script src="../js/test.js"></script>
     <!-- <script src="../js/main.js"></script> -->
-    <div id="parent" style="width:100%;height: 90vh;"> <!--idk why it only works with % and vh and vw nothing else-->
+    <!-- <div id="parent" style="width:100%;height: 90vh;"> <!--idk why it only works with % and vh and vw nothing else
         <canvas id="myChart" ></canvas>
+    </div> -->
+
+    <div id="table-part" class="container table-responsive">
+        <table class="table table-bordered align-middlle w-100 m-0">
+            <thead  class="table-light">
+                <tr class="glow-red">
+                    <td scope="col" class="d-none d-md-table-cell">Rank</td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col" class="d-none d-md-table-cell">Market Cap</th>
+                    <th scope="col" class="d-none d-md-table-cell">VWAP(24Hr)</th>
+                    <th scope="col" class="d-none d-md-table-cell">Supply</th>
+                    <th scope="col" class="d-none d-md-table-cell">Volume(24Hr)</th>
+                    <th scope="col">Change(24Hr)</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>1</td>
+                    <td>Bitcoin</td>
+                    <td>$95,474.45</td>
+                    <td class="d-none d-sm-table-cell">$96,385.39</td>
+                    <td class="d-none d-sm-table-cell">$1.89t</td>
+                    <td class="d-none d-sm-table-cell">19.83m</td>
+                    <td class="d-none d-sm-table-cell">$4.12b</td>
+                    <td >-1.25%</td>
+                </tr> 
+                
+            </tbody>
+        </table>
+    </div>
+    <div class="glow-red">
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium voluptates sit, quod delectus fugit, totam odio asperiores natus sed, ducimus quo. Assumenda, eveniet voluptatibus possimus sit sequi aspernatur molestiae autem?</p>
     </div>
 
 

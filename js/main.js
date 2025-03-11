@@ -3,6 +3,12 @@ let t = document.getElementsByTagName("tbody")[0];
 let coinExpanded = false ;
 let coinsdata;
 let logosJson;
+let previousePrices = {};
+let pricesWs = null;
+let socketCoins="";
+let intervalId;
+let intervalIdTest;
+let timeOutId;
 
 let updateTable = function(updateStart=0){    //takes the first row to be updated
     // for (let i=0;i<t.children.length;i++){
@@ -22,10 +28,13 @@ let updateTable = function(updateStart=0){    //takes the first row to be update
                 logosText.then((l)=> {
                     logosJson=JSON.parse(l)
 
+                    
+
                     for(i=updateStart;i<rows;i++){
                         // document.getElementsByTagName("p")[0].innerHTML= document.getElementsByTagName("p")[0].innerHTML +"<br>"+ parsed.data[k]["id"];
                         var r = t.appendChild(document.createElement("tr"));
                         r.addEventListener("click", expandCoin )
+                        r.dataset.coin = parsed.data[i]["id"] //adding -data attribute to make the websocket lookup easier
                         var d = r.appendChild(document.createElement("td"));
                         d.appendChild(document.createTextNode(parsed.data[i]["rank"]));
                         d.classList.add("d-none","d-md-table-cell");
@@ -53,7 +62,28 @@ let updateTable = function(updateStart=0){    //takes the first row to be update
                         d.classList.add("d-none","d-md-table-cell");
                         var d = r.appendChild(document.createElement("td"));
                         d.appendChild(document.createTextNode(formatPrecentage(parsed.data[i]["changePercent24Hr"])));
+
+                        // if(previousePrices === null){
+                        //     continue
+                        // }
+                        // else if( parsed.data[i]["priceUsd"] > previousePrices[`${parsed.data[i]["symbol"]}`])
+                        // {
+                        //     r.classList.add("glow-green")
+                        // }
+                        // else if( parsed.data[i]["priceUsd"] < previousePrices[`${parsed.data[i]["symbol"]}`])
+                        // {
+                        //         r.classList.add("glow-red")
+                        // }
+                        previousePrices[`${parsed.data[i]["id"]}`] = parsed.data[i]["priceUsd"]
+
+                        socketCoins+=`,${parsed.data[i]["id"]}`
+                        
                     }
+
+                    console.log(socketCoins.slice(1))
+                    startWebSocket(socketCoins.slice(1));
+                    // startWebSocket("bitcoin"); to debug the websocket on one coin
+                    console.log(previousePrices)
                     // console.log(parsed[0])
 
             })
@@ -66,6 +96,7 @@ let updateTable = function(updateStart=0){    //takes the first row to be update
 
 onload =()=>{
     updateTable();
+    // setInterval(updateTable,3000);
 }
 
 
@@ -76,6 +107,14 @@ let viewMore = function(){
     }
     if(rows<=100){
         rows += 20;
+        if(pricesWs){
+            pricesWs.close()
+            pricesWs=null;
+            clearInterval(intervalId);
+            clearInterval(intervalIdTest);
+            
+            console.log("stopped the current WebSocket")
+        }
         updateTable(t.children.length);
     }
     else{
@@ -222,7 +261,7 @@ function expandCoin(){
 
 
 
-        //creating the chart and the info on top of it : 
+        //creating the chart and the info on top of it :
 
         let yData = [];
         let xData = [];
@@ -371,4 +410,58 @@ function displayChart(url){
         })
 
     }).catch(err=>console.log(err))
-} 
+}
+
+
+let latestUpdates = {};
+
+function startWebSocket(socketCoins){
+    pricesWs = new WebSocket(`wss://ws.coincap.io/prices?assets=${socketCoins}`)
+    pricesWs.onmessage = function (msg) {
+        console.log(msg.data)
+        let priceUpdates = JSON.parse(msg.data);
+        latestUpdates = {...latestUpdates, ...priceUpdates};
+    }
+    intervalId = setInterval(()=>{
+        for ( let [k,v] of Object.entries(latestUpdates)){
+            let r = document.querySelector(`[data-coin="${k}"]`)
+            // console.log(`Checking row for ${k}:`, r);
+
+
+            if (r) {
+                if( v > previousePrices[k])
+                    {
+                        r.querySelectorAll("td")[2].textContent=formatCurrency(v)
+                        r.querySelectorAll("td").forEach((cell)=>{
+                            cell.classList.add("glow-green")
+                        })
+                        
+                    }
+                    else if( v < previousePrices[k])
+                    {
+                        r.querySelectorAll("td")[2].textContent=formatCurrency(v)
+                        r.querySelectorAll("td").forEach((cell)=>{
+                            cell.classList.add("glow-red")
+                        })
+                    }
+                }
+                else {
+                console.warn("Row disappeared for", k);
+            }
+
+            
+            previousePrices[k]=v
+            timeOutId = setTimeout(() => {
+                r.querySelectorAll("td").forEach((cell)=>{
+                    cell.classList.remove("glow-green", "glow-red");
+                })
+            }, 900);
+        }
+
+        latestUpdates = {};
+
+    },1000)
+    intervalIdTest = setInterval(()=>{
+        console.log("5 sec")
+    },1000)
+}

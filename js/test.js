@@ -132,50 +132,50 @@
 //     console.log(unixTime36HoursAgo)
     
 // }
-let logosObj;
-let coinsObj;
-let newlogos = new Array;
-let c=0;
+// let logosObj;
+// let coinsObj;
+// let newlogos = new Array;
+// let c=0;
 
 
 
-let b = fetch("https://api.coincap.io/v2/assets");
-    b.then((data) => {
-        let j = data.text();
-        j.then((p) => {
-            let parsed = JSON.parse(p);
-            coinsObj = parsed
-            let a = fetch("../json/cryptos.json");
-            a.then((response)=>{
-            let txt = response.text();
-            txt.then((p)=>{
-                let parsed = JSON.parse(p);
-                // console.log(parsed)
-                logosObj=parsed
-                for(let i =0;i<100;i++){
-                    // console.log(coinsObj.data[i].symbol)
+// let b = fetch("https://api.coincap.io/v2/assets");
+//     b.then((data) => {
+//         let j = data.text();
+//         j.then((p) => {
+//             let parsed = JSON.parse(p);
+//             coinsObj = parsed
+//             let a = fetch("../json/cryptos.json");
+//             a.then((response)=>{
+//             let txt = response.text();
+//             txt.then((p)=>{
+//                 let parsed = JSON.parse(p);
+//                 // console.log(parsed)
+//                 logosObj=parsed
+//                 for(let i =0;i<100;i++){
+//                     // console.log(coinsObj.data[i].symbol)
                 
-                    for(let j=0 ; j<logosObj.length ; j++)
-                    if(coinsObj.data[i].symbol===logosObj[j].symbol){
-                        // console.log(coinsObj.data[i].symbol)
-                        newlogos = [...newlogos,{symbol:logosObj[j].symbol ,logo:logosObj[j].icon}]
-                        break
-                    }else if(coinsObj.data[i].symbol!==logosObj[j].symbol && j===499){
-                        newlogos = [...newlogos,{symbol:logosObj[j].symbol ,logo:"../images/not-found.png"}]
-                        c++;
-                        // console.log(coinsObj.data[i].symbol +" is not found ")
-                    }
+//                     for(let j=0 ; j<logosObj.length ; j++)
+//                     if(coinsObj.data[i].symbol===logosObj[j].symbol){
+//                         // console.log(coinsObj.data[i].symbol)
+//                         newlogos = [...newlogos,{symbol:logosObj[j].symbol ,logo:logosObj[j].icon}]
+//                         break
+//                     }else if(coinsObj.data[i].symbol!==logosObj[j].symbol && j===499){
+//                         newlogos = [...newlogos,{symbol:logosObj[j].symbol ,logo:"../images/not-found.png"}]
+//                         c++;
+//                         // console.log(coinsObj.data[i].symbol +" is not found ")
+//                     }
                     
-                }
-                // console.log(c)
-                for (let i=0 ; i<coinsObj.data.length ; i++){
-                    document.getElementsByTagName("p")[0].innerHTML=document.getElementsByTagName("p")[0].innerHTML+`"${coinsObj.data[i].symbol}":"../images/logos/symbol/${coinsObj.data[i].symbol}.PNG",\n`
-                }
-                // console.log(coinsObj.data)
+//                 }
+//                 // console.log(c)
+//                 for (let i=0 ; i<coinsObj.data.length ; i++){
+//                     document.getElementsByTagName("p")[0].innerHTML=document.getElementsByTagName("p")[0].innerHTML+`"${coinsObj.data[i].symbol}":"../images/logos/symbol/${coinsObj.data[i].symbol}.PNG",\n`
+//                 }
+//                 // console.log(coinsObj.data)
         
-    })
-})
-        })})
+//     })
+// })
+//         })})
 
 // coinsObj.forEach(coinsObj => {
 //     const match = objArray.find(logosObj => logosObj.symbol === coinsObj.symbol);
@@ -187,4 +187,11 @@ let b = fetch("https://api.coincap.io/v2/assets");
 
     // for( k,v in  coinsObj,coinsObj.values ){
     //     console.log(k)
+    // }
+
+
+    // const pricesWs = new WebSocket('wss://ws.coincap.io/prices?assets=bitcoin,ethereum,monero,litecoin')
+
+    // pricesWs.onmessage = function (msg) {
+    //     console.log(msg.data)
     // }
