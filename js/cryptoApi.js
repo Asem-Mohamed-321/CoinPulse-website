@@ -1,16 +1,14 @@
 // currencies exported
-import { currencies } from './currencies.js';
+//import { currencies } from './currencies.js';
 
 const api = 'https://api.coincap.io/v2/assets';
+const currency = 'https://api.coincap.io/v2/rates'; 
 
 async function fetchCrypto() {
     const response = await fetch(api);
     const data = await response.json();
 
     const selectBar = document.getElementById('fromCurrency');
-
-
-
 
     if (data.data && Array.isArray(data.data)) {
       data.data.forEach(crypto => {
@@ -22,29 +20,46 @@ async function fetchCrypto() {
     }
 }
 
-function fetchCurrency() {
+async function fetchCurrency() {
 
-    const result = currencies;
+    //const result = currencies;
+    const response = await fetch(currency);
+    const data = await response.json();
+    
     const toBar = document.getElementById('toCurrency');
     
     // for the offcanvas
     //const menu = document.getElementById('dropmenu'); XXXX
     const offcanvasSelect = document.getElementById('convertSelect');
 
-
+/*
     Object.keys(result.exchange_rates).forEach(currency => {
       const option = document.createElement('option');
       option.value = currency;
       option.textContent = `${currency}`;
       toBar.appendChild(option);
-                  /******/
+                  
 
       const offcanvasOption = document.createElement('option');
       offcanvasOption.value = currency;
       offcanvasOption.textContent =`${currency}`;
       offcanvasSelect.appendChild(offcanvasOption);
-    });
-    
+    });*/
+
+    if (data.data && Array.isArray(data.data)) {
+      data.data.forEach(currency  => {
+        const option = document.createElement('option');
+        option.value = currency.symbol;
+        option.textContent = `${currency.symbol}`;
+        toBar.appendChild(option);
+
+        const offcanvasOption = document.createElement('option');
+        offcanvasOption.value = currency.symbol;
+        offcanvasOption.textContent =`${currency.symbol}`;
+        offcanvasSelect.appendChild(offcanvasOption);
+      });
+    }
+
 }
 
 
@@ -57,19 +72,28 @@ async function convert() {
   
   const response = await fetch (api);
   const data = await response.json();
-  const crypto = data.data.find(item=> item.id === fromCurrency);
+//////////////////////////////////////////
 
-  if (crypto && crypto.priceUsd && currencies.exchange_rates[toCurrency]){
+  const res = await fetch(currency);
+  const curr = await res.json();
+/////////////////////////////////////////////
+
+
+  const crypto = data.data.find(item=> item.id === fromCurrency);
+  const selectedCurrency = curr.data.find(curr => curr.symbol === toCurrency);
+
+
+  if (crypto.priceUsd && selectedCurrency.rateUsd){
     const price = amount * parseFloat(crypto.priceUsd);
-    
-    const convertedAmount = price * currencies.exchange_rates[toCurrency];
+    const convertedAmount = price * parseFloat(selectedCurrency.rateUsd);
+
     
     
     //console.log(convertedAmount);
 
 
     // result to be shown // Converstiona Rate: x BTC x USD
-    result.innerHTML = `Converstiona Rate: ${amount} ${crypto.symbol} ${convertedAmount.toFixed(2)} ${toCurrency}`
+    result.innerHTML = `Conversion Rate: ${amount} ${crypto.symbol} = ${convertedAmount.toFixed(2)} ${toCurrency}`;
 
   }
 
@@ -78,8 +102,16 @@ async function convert() {
 
 
 async function fetchConversions() {
+  
+  // fetch crypto 
   const response = await fetch(api);
   const data = await response.json();
+
+
+  // fetch currency
+  const res = await fetch(currency);
+  const curr = await res.json();
+  console.log(curr);
 
   const div = document.getElementById('conversions');
   const toCurrency=document.getElementById('convertSelect').value; 
@@ -98,7 +130,8 @@ async function fetchConversions() {
       const input = document.createElement('input');
       input.type= 'text';
       input.className='form-control mt-1 col-2 rounded-pill bg-light';
-      const convertedAmount = parseFloat(crypto.priceUsd) * currencies.exchange_rates[toCurrency];
+      const selectedCurrency = curr.data.find(item => item.symbol === toCurrency);
+      const convertedAmount = parseFloat(crypto.priceUsd) * parseFloat(selectedCurrency.rateUsd);
       input.value = `1 ${crypto.symbol} | ${convertedAmount.toFixed(2)} ${toCurrency}`;
       input.readOnly = true;
       colDiv.appendChild(input);

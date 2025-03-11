@@ -34,6 +34,108 @@
         </div>
     </nav>
 
+    <!-- Contact Us -->
+    <div class="modal fade" id="contactUsModal" tabindex="-1" aria-labelledby="contactUs" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          
+          <div class="modal-header">
+            <h5 class="modal-title" id="contactUsModal">Contact Us</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="contactName" class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="contactName" placeholder="Enter Your Name">
+            </div>
+            <div class="mb-3">
+              <label for="contactEmail" class="form-label">Your Email</label>
+              <input type="text" class="form-control" id="contactEmail" placeholder="Enter Your email">
+            </div>
+            <div class="mb-3">
+              <label for="contactMessage" class="form-label">Your Message</label>
+              <textarea class="form-control" id="contactName" rows="4" placeholder="Enter Your Message"></textarea>
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Send Message</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+
+<!-- Auth Modal -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content p-4 shadow-lg rounded-3">
+          <div class="modal-header border-0">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="nav nav-tabs justify-content-center" id="authTabs" role="tablist">
+                  <div class="nav-item me-4" role="presentation">
+                      <button class="nav-link active fw-bold text-primary" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">
+                          Log In
+                      </button>
+                  </div>
+                  <div class="nav-item" role="presentation">
+                      <button class="nav-link fw-bold text-primary" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab">
+                          Sign Up
+                      </button>
+                  </div>
+              </div>
+
+              <div class="tab-content mt-4" id="authTabsContent">
+                  <!-- Log In -->
+                  <div class="tab-pane fade show active" id="login" role="tabpanel">
+                      <form>
+                          <div class="mb-3">
+                              <label for="loginEmail" class="form-label fw-semibold">Email Address</label>
+                              <input type="email" class="form-control rounded-2" id="loginEmail" placeholder="Enter your email...">
+                          </div>
+                          <div class="mb-3">
+                              <label for="loginPassword" class="form-label fw-semibold">Password</label>
+                              <input type="password" class="form-control rounded-2" id="loginPassword" placeholder="Enter your password...">
+                          </div>
+                          <button type="submit" class="btn btn-primary w-100 py-2">Log In</button>
+                      </form>
+                  </div>
+
+                  <!-- Sign Up -->
+                  <div class="tab-pane fade" id="signup" role="tabpanel">
+                      <form>
+                          <div class="mb-3">
+                              <label for="signupName" class="form-label fw-semibold">Full Name</label>
+                              <input type="text" class="form-control rounded-2" id="signupName" placeholder="Enter your full name...">
+                          </div>
+                          <div class="mb-3">
+                              <label for="signupEmail" class="form-label fw-semibold">Email Address</label>
+                              <input type="email" class="form-control rounded-2" id="signupEmail" placeholder="Enter your email address...">
+                          </div>
+                          <div class="mb-3">
+                              <label for="signupPassword" class="form-label fw-semibold">Password</label>
+                              <input type="password" class="form-control rounded-2" id="signupPassword" placeholder="Create a password...">
+                          </div>
+                          <button type="submit" class="btn btn-success w-100 py-2">Sign Up</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
     <!-- first div (coin info) -->
     <div class="firstDiv h-20 container pt-5" >
         <div class="row">
@@ -170,5 +272,7 @@
             <br><br>
         </div>
         </footer>
+        <script src="../vendor/bootstrap/js/bootstrap.bundle.js"></script>
+      <script type="module" src="../js/auth.js"></script>
 </body>
 </htm>
