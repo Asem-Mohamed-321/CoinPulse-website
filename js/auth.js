@@ -11,8 +11,6 @@
 
   
   
-  /// sign up
-  
   export const signUp = (name, email, password) => {
     const users = loadUsers()
   
@@ -21,83 +19,101 @@
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/
   
     if (!emailRegex.test(email)) {
-      showAuthMessage('Invalid email format. Please enter a valid email address.', 'danger')
+      showInline('Invalid email format. Please enter a valid email address.', 'danger', 'signup')
       return
-      
     }
   
     if (!passwordRegex.test(password)) {
-      showAuthMessage('Password must be at least 8 characters, include one uppercase letter and one number.', 'danger')
+      showInline('Password must be at least 8 characters, include one uppercase letter and one number.', 'danger', 'signup')
       return
     }
   
-    // Check if user already exists
+    // check if  already exists
     if (users.some(user => user.email === email)) {
-      showAuthMessage('User already exists. Please log in!', 'danger')
+      showInline('User already exists. Please log in!', 'danger', 'signup')
       return
     }
+  
   
     
-    // Add new user to localStorage
+    
+    // save new user to localStorage
     const newUser = { name, email, password, watchList: [] }
     users.push(newUser)
     saveUsers(users)
   
     
+    
+    
     // Automatic log in
     sessionStorage.setItem('loggedInUser', JSON.stringify(newUser))
-    showAuthMessage('Sign up successful! You are now logged in.', 'success')
+    //showInline('Sign up successful! You are now logged in.', 'success', 'signup')
+    showMsg('Sign up successful! You are now logged in.', 'success',)
+    
+    
     updateNavbar(newUser.name)
 
-  // hide the form automatic once signed up
-  const authModal = bootstrap.Modal.getInstance(document.getElementById('authModal'))
-  if(authModal){
-    authModal.hide()
+
+  
+    
+    
+    
+    // Hide the form automatic
+    const authModal = bootstrap.Modal.getInstance(document.getElementById('authModal'))
+    if (authModal) {
+      authModal.hide()
+    }
   }
+
+
+
   
-
-  }
-  
-  
-
-
-
-  const logIn = (email, password) =>{
+  const logIn = (email, password) => {
     const users = loadUsers()
     const user = users.find(user => user.email === email && user.password === password)
-    if (user){
+    
+    if (user) {
       sessionStorage.setItem('loggedInUser', JSON.stringify(user))
-      showAuthMessage(`Welcome back, ${user.name}!`, 'success')
-
+      
+      //showInline(`Welcome back, ${user.name}!`, 'success', 'login')
+      showMsg(`Welcome back, ${user.name}!`, 'success')
+      
       updateNavbar(user.name)
-
-  // hide the form automatic once signed up
-  const authModal = bootstrap.Modal.getInstance(document.getElementById('authModal'))
-  if(authModal){
-    authModal.hide()
-  }
-  controlAddCoinsButton()
-    }
-
-    else showInline('invaild email or password','danger')
-  }
-
-
-
-
-  const logOut = () => {
-    sessionStorage.removeItem('loggedInUser')
-    alert('Logged out')
-    resetNavbar()
-    controlAddCoinsButton()
-  }
   
+      // Hide the form automatic
+      const authModal = bootstrap.Modal.getInstance(document.getElementById('authModal'))
+      if (authModal) {
+        authModal.hide()
+      }
+      controlAddCoinsButton()
+    } else {
+      showInline('Invalid email or password', 'danger', 'login')
+    }
+  }
 
 
 
 
-  const showInline = (message, color) => {
-    const form = document.querySelector('#login form')
+  // Show message func
+  const showMsg = (message, color) => {
+    const messageDiv = document.createElement('div')
+    messageDiv.className = `alert alert-${color} text-center`
+    messageDiv.innerText = message
+  
+    const container = document.querySelector('.backgroundcontainer')
+    container.prepend(messageDiv)
+  
+    setTimeout(() => messageDiv.remove(),700)
+  }
+
+
+
+
+
+
+  
+  const showInline = (message, color, section) => {
+    const form = document.querySelector(`#${section}`)
     if (form) {
       const old = form.querySelector('.inline-message')
       if (old) {
@@ -110,11 +126,23 @@
   
       form.prepend(messageDiv)
   
-      setTimeout(() => messageDiv.remove(), 2000)
+      setTimeout(() => messageDiv.remove(), 3000)
     }
   }
+  
+
+  
 
 
+
+
+
+  const logOut = () => {
+    sessionStorage.removeItem('loggedInUser')
+    alert('Logged out')
+    resetNavbar()
+    controlAddCoinsButton()
+  }
 ////////////////////////////////////
 
 
@@ -125,6 +153,7 @@
     if (loginLink) {
         loginLink.innerHTML = `${name} | <a href="#" id="logoutLink" class="nav-link d-inline">Log Out</a>`
         loginLink.href = '#'
+        
         document.getElementById('logoutLink').addEventListener('click', logOut)
     }
   }
@@ -219,7 +248,7 @@
       } else {
         newAddCoinsButton.disabled = false
         newAddCoinsButton.addEventListener('click', () => {
-          showAuthMessage('Please log in to add coins to your watchlist.',"danger")
+          showMsg('Please log in to add coins to your watchlist.',"danger")
         })
       }
     }
@@ -229,17 +258,7 @@
 
 
 
-  // Show message func
-  const showAuthMessage = (message, color) => {
-    const messageDiv = document.createElement('div')
-    messageDiv.className = `alert alert-${color} text-center`
-    messageDiv.innerText = message
-  
-    const container = document.querySelector('.backgroundcontainer')
-    container.prepend(messageDiv)
-  
-    setTimeout(() => messageDiv.remove(),700)
-  }
+
   
 
   document.addEventListener('DOMContentLoaded', controlAddCoinsButton)
