@@ -55,14 +55,13 @@
 
 
   
-    
-    
-    
     // Hide the form automatic
-    const authModal = bootstrap.Modal.getInstance(document.getElementById('authModal'))
+    const authModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('authModal'))
     if (authModal) {
       authModal.hide()
     }
+    
+    
   }
 
 
@@ -81,10 +80,11 @@
       updateNavbar(user.name)
   
       // Hide the form automatic
-      const authModal = bootstrap.Modal.getInstance(document.getElementById('authModal'))
+      const authModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('authModal'))
       if (authModal) {
         authModal.hide()
       }
+      
       controlAddCoinsButton()
     } else {
       showInline('Invalid email or password', 'danger', 'login')
@@ -94,17 +94,21 @@
 
 
 
-  // Show message func
   const showMsg = (message, color) => {
     const messageDiv = document.createElement('div')
-    messageDiv.className = `alert alert-${color} text-center`
+    
+    messageDiv.className = `alert alert-${color} text-center m-0`
     messageDiv.innerText = message
+
+
+// to be shown after nav
+    const navbar = document.querySelector('.navbar')
+    navbar.insertAdjacentElement('afterend', messageDiv)
   
-    const container = document.querySelector('.backgroundcontainer')
-    container.prepend(messageDiv)
-  
-    setTimeout(() => messageDiv.remove(),1000)
+
+    setTimeout(() => messageDiv.remove(), 1000)
   }
+  
 
 
 
