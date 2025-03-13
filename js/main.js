@@ -418,7 +418,7 @@ let latestUpdates = {};
 function startWebSocket(socketCoins){
     pricesWs = new WebSocket(`wss://ws.coincap.io/prices?assets=${socketCoins}`)
     pricesWs.onmessage = function (msg) {
-        console.log(msg.data)
+        // console.log(msg.data)
         let priceUpdates = JSON.parse(msg.data);
         latestUpdates = {...latestUpdates, ...priceUpdates};
     }
@@ -461,7 +461,7 @@ function startWebSocket(socketCoins){
         latestUpdates = {};
 
     },1000)
-    intervalIdTest = setInterval(()=>{
-        console.log("5 sec")
-    },1000)
+    // intervalIdTest = setInterval(()=>{
+    //     console.log("5 sec")
+    // },1000)
 }

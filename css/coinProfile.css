@@ -31,7 +31,7 @@ nav{
 
 /* first div */
 
-@media (min-width:275px) {
+@media (min-width:430px) {
     #disappearsmall{
         display: inline !important;
     }
@@ -69,7 +69,26 @@ nav{
     color: white ;
 }
 #rankImg{
-    /* height: 20%; */
+    height: 10rem !important;
+    max-width: 100%;
+    min-width: 10rem !important;
+    position: relative;
+    top: -31%;
+}
+#ranktext{
+    position: relative;
+    top: 36%;
+    left: 3rem;
+
+    /* -webkit-text-stroke: 1px black; Border effect */
+    color: black;
+    z-index: 10;
+    width: 4rem;
+    text-align: center;
+    /* left: 84%; */
+    /* transform: translate(-30%, 0%); */
+
+
 }
 
 /*  */

@@ -170,6 +170,7 @@ function DisplayCoinInfo(coin){
 
             //fills the data on top
 
+            document.getElementById("ranktext").innerHTML=parsed.data.rank
             document.getElementById("CoinName").innerHTML=parsed.data.name+" ("+parsed.data.symbol+")"
             document.getElementById("CoinPriceAndChange").innerHTML=formatCurrency(parsed.data.priceUsd)+`&nbsp; &nbsp; &nbsp;`+formatPrecentage(parsed.data.changePercent24Hr)
             document.getElementById("CoinMarketCap").innerHTML=`<b>${formatImpact(parsed.data.marketCapUsd)}</b>`
