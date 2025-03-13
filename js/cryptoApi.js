@@ -83,9 +83,9 @@ async function convert() {
   const selectedCurrency = curr.data.find(curr => curr.symbol === toCurrency);
 
 
-  if (crypto.priceUsd && selectedCurrency.rateUsd){
-    const price = amount * parseFloat(crypto.priceUsd);
-    const convertedAmount = price * parseFloat(selectedCurrency.rateUsd);
+  if (crypto.priceUsd && selectedCurrency.rateUsd) {
+    const priceInUsd = amount * parseFloat(crypto.priceUsd);
+    const convertedAmount = priceInUsd / parseFloat(selectedCurrency.rateUsd);
 
     
     
@@ -124,15 +124,18 @@ async function fetchConversions() {
     data.data.forEach(crypto => {
 
       const colDiv = document.createElement('div');
-      colDiv.className = 'col-4 col-md-2';
+      
+      // 
+      colDiv.className = 'col-4 col-lg-2 col-sm-3';
       
       // input creation
       const input = document.createElement('input');
       input.type= 'text';
-      input.className='form-control mt-1 col-2 rounded-pill bg-light';
+      input.className='form-control mt-1 col-2  rounded-pill bg-light font-size';
       const selectedCurrency = curr.data.find(item => item.symbol === toCurrency);
-      const convertedAmount = parseFloat(crypto.priceUsd) * parseFloat(selectedCurrency.rateUsd);
+      const convertedAmount = parseFloat(crypto.priceUsd) / parseFloat(selectedCurrency.rateUsd);
       input.value = `1 ${crypto.symbol} | ${convertedAmount.toFixed(2)} ${toCurrency}`;
+      //input.style.fontSize='medium'      
       input.readOnly = true;
       colDiv.appendChild(input);
       rowDiv.appendChild(colDiv);

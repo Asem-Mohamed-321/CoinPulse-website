@@ -48,27 +48,33 @@
       </div>
       
       <div class="modal-body">
-        <div class="mb-3">
-          <label for="contactName" class="form-label">Your Name</label>
-          <input type="text" class="form-control" id="contactName" placeholder="Enter Your Name">
-        </div>
-        <div class="mb-3">
-          <label for="contactEmail" class="form-label">Your Email</label>
-          <input type="text" class="form-control" id="contactEmail" placeholder="Enter Your email">
-        </div>
-        <div class="mb-3">
-          <label for="contactMessage" class="form-label">Your Message</label>
-          <textarea class="form-control" id="contactName" rows="4" placeholder="Enter Your Message"></textarea>
-        </div>
-      </div>
       
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Send Message</button>
+        <form action="#" method="get">
+          <div class="mb-3">
+            <label for="contactName" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="contactName" name="name" placeholder="Enter Your Name">
+          </div>
+          <div class="mb-3">
+            <label for="contactEmail" class="form-label">Your Email</label>
+            <input type="email" class="form-control" id="contactEmail" name="email" placeholder="Enter Your Email">
+          </div>
+          <div class="mb-3">
+            <label for="contactMessage" class="form-label">Your Message</label>
+            <textarea class="form-control" id="contactMessage" name="message" rows="4" placeholder="Enter Your Message"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </div>
+        </form>
+
+
       </div>
-      
+
     </div>
+
   </div>
 </div>
+
 
 
 <!-- Auth Modal -->
@@ -194,30 +200,31 @@
               Conversions
             </a></h3>
             
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Convert Currency</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+
+
+
+          </div>
+
+
+
+
+          
+          <!-- Off canvas Menu-->
+          <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasExampleLabel">Convert Currency</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <div>
+                Choose the default Currency.
               </div>
-              <div class="offcanvas-body">
-                <div>
-                  Choose the default Currency.
-                </div>
-                <div class="dropdown mt-3">
-                  <select class="form-select" id="convertSelect">
-                  </select>
-                </div>
+              <div class="dropdown mt-3">
+                <select class="form-select" id="convertSelect">
+                </select>
               </div>
             </div>
-
-
-
-
-
-
-
-
-
           </div>
 
           <div class="row mt-1 primary" id="conversions">

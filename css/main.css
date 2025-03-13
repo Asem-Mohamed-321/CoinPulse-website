@@ -25,7 +25,22 @@ nav{
 @media (min-width:992px) {
     #logo{
         padding-left: 0%;
+
     }
+
+
+}
+
+@media (min-width:1200px){
+  .font-size{
+    font-size: medium !important;
+  }
+}
+
+
+.font-size{
+  font-size: small;
+
 }
 /*  */
 
@@ -34,11 +49,17 @@ nav{
     .firstDiv{
         height: 20rem;
     }
+    .font-size{
+      font-size: x-small;
+    }
+
 }
 @media (min-width:768px) {
     .firstDiv{
         height: 15rem;
     }
+
+
 }
 .firstDivParent{
     position: relative;
