@@ -1,14 +1,16 @@
-
 const api = 'https://api.coincap.io/v2/assets';
 
+// fetch crypto 
 
 async function fetchCryptoOptions() {
   const response = await fetch(api);
   const data = await response.json();
 
   const select = document.getElementById('coinSelect');
-  select.innerHTML = '<option disabled selected>Select a coin</option>'; // Clear
+  select.innerHTML = '<option disabled selected>Select a coin</option>'; 
 
+  
+  
   if (data.data && Array.isArray(data.data)) {
     data.data.forEach(coin => {
       const option = document.createElement('option');
@@ -16,12 +18,15 @@ async function fetchCryptoOptions() {
       option.textContent = `${coin.name} (${coin.symbol})`;
       select.appendChild(option);
     });
+
   }
+
+
 }
 
-
-
+// Add coin to user watchlist
 async function addCoinToWatchlist() {
+  
   const select = document.getElementById('coinSelect');
   const coinId = select.value;
 
@@ -42,10 +47,11 @@ async function addCoinToWatchlist() {
     if (userIndex !== -1) {
       const userWatchlist = users[userIndex].watchList;
 
-      // duplicate
+      // 
+      //  duplicates
       const alreadyExists = userWatchlist.some(item => item.id === coin.id);
       if (alreadyExists) {
-        alert(`${coin.name} is already in your watchlist!`)
+        alert(`${coin.name} is already in your watchlist!`);
         return;
       }
 
@@ -55,27 +61,47 @@ async function addCoinToWatchlist() {
       localStorage.setItem('users', JSON.stringify(users));
       sessionStorage.setItem('loggedInUser', JSON.stringify(users[userIndex]));
 
-      // Update table
       renderWatchlist(userWatchlist);
 
-      // Close modal
+      // Close 
       const modal = bootstrap.Modal.getInstance(document.getElementById('addCoinModal'));
       modal.hide();
     }
   }
 }
 
+// Remove coin
+function removeCoinFromWatchlist(coinId) {
+  const sessionUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
+  if (!sessionUser) return;
 
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const userIndex = users.findIndex(user => user.email === sessionUser.email);
 
-/// the watchlist to be shown
+  
+  
+  if (userIndex !== -1) {
+    const userWatchlist = users[userIndex].watchList.filter(coin => coin.id !== coinId);
+    users[userIndex].watchList = userWatchlist;
+
+    
+    localStorage.setItem('users', JSON.stringify(users));
+    
+    sessionStorage.setItem('loggedInUser', JSON.stringify(users[userIndex]));
+
+    renderWatchlist(userWatchlist);
+  }
+}
+
+// Render twatchlist
 
 function renderWatchlist(watchList) {
   const tableBody = document.querySelector('tbody');
   tableBody.innerHTML = '';
 
   if (watchList.length === 0) {
-    tableBody.innerHTML = '<tr><td colspan="8" class="text-center">Your watchlist is empty</td></tr>';
+    tableBody.innerHTML = '<tr><td colspan="9" class="text-center">Your watchlist is empty</td></tr>';
     return;
   }
 
@@ -90,44 +116,41 @@ function renderWatchlist(watchList) {
       <td class="d-none d-sm-table-cell">${(coin.supply / 1e6).toFixed(2)} M</td>
       <td class="d-none d-sm-table-cell">$${(coin.volumeUsd24Hr / 1e9).toFixed(2)} B</td>
       <td>${parseFloat(coin.changePercent24Hr).toFixed(2)}%</td>
+    
+      <td>
+        <button class="btn btn-danger btn-sm" onclick="removeCoinFromWatchlist('${coin.id}')">Remove</button>
+      </td>
     `;
   });
 }
 
-
-
-
-
-// for checking 
+// Handle user login
 function handleLogin() {
+  //
+  //const sessionUser = sessionStorage.getItem('loggedInUser');
   const sessionUser = sessionStorage.getItem('loggedInUser');
   if (sessionUser) {
     const user = JSON.parse(sessionUser);
     renderWatchlist(user.watchList);
   } else {
-    
-    // Show empty table if logged out
-    renderWatchlist([]); 
+    renderWatchlist([]);
   }
 }
 
+// Check session 
 function checkUserSession() {
   const sessionUser = sessionStorage.getItem('loggedInUser');
   if (!sessionUser) {
-    renderWatchlist([]); // Clear table 
+    renderWatchlist([]);
+  } else {
+    const user = JSON.parse(sessionUser);
+    renderWatchlist(user.watchList);
   }
-  else {  const user = JSON.parse(sessionUser);
-    renderWatchlist(user.watchList);}
 }
+
 setInterval(checkUserSession, 500);
-
-
 
 window.onload = function () {
   fetchCryptoOptions();
   handleLogin();
 };
-
-
-
-
