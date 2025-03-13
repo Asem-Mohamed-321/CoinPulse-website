@@ -18,8 +18,10 @@ nav{
 #navbarNavAltMarkup{
     padding-left: 10%;
 }
-#logo{
+nav a img{
     padding-left: 45%;
+    max-width: 20rem !important;
+    width: auto;
 }
 
 @media (min-width:992px) {
