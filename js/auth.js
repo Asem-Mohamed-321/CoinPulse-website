@@ -103,7 +103,7 @@
     const container = document.querySelector('.backgroundcontainer')
     container.prepend(messageDiv)
   
-    setTimeout(() => messageDiv.remove(),700)
+    setTimeout(() => messageDiv.remove(),1000)
   }
 
 
