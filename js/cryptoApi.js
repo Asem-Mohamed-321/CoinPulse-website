@@ -83,9 +83,9 @@ async function convert() {
   const selectedCurrency = curr.data.find(curr => curr.symbol === toCurrency);
 
 
-  if (crypto.priceUsd && selectedCurrency.rateUsd){
-    const price = amount * parseFloat(crypto.priceUsd);
-    const convertedAmount = price * parseFloat(selectedCurrency.rateUsd);
+  if (crypto.priceUsd && selectedCurrency.rateUsd) {
+    const priceInUsd = amount * parseFloat(crypto.priceUsd);
+    const convertedAmount = priceInUsd / parseFloat(selectedCurrency.rateUsd);
 
     
     
@@ -131,8 +131,8 @@ async function fetchConversions() {
       input.type= 'text';
       input.className='form-control mt-1 col-2 rounded-pill bg-light';
       const selectedCurrency = curr.data.find(item => item.symbol === toCurrency);
-      const convertedAmount = parseFloat(crypto.priceUsd) * parseFloat(selectedCurrency.rateUsd);
-      input.value = `1 ${crypto.symbol} | ${convertedAmount.toFixed(2)} ${toCurrency}`;
+      const convertedAmount = parseFloat(crypto.priceUsd) / parseFloat(selectedCurrency.rateUsd);
+      input.value = `1 ${crypto.symbol} | ${convertedAmount.toFixed(2)} ${toCurrency}`;      
       input.readOnly = true;
       colDiv.appendChild(input);
       rowDiv.appendChild(colDiv);
