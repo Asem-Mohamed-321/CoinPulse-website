@@ -143,6 +143,7 @@
 
   const logOut = () => {
     sessionStorage.removeItem('loggedInUser')
+    location.assign('main.html')
     alert('Logged out')
     resetNavbar()
     controlAddCoinsButton()
@@ -204,8 +205,10 @@
 
 
 
-  document.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('load', function () {
     const signupForm = document.querySelector('#signup form')
+    // const signupForm = document.getElementById('signup')
+
     const loginForm = document.querySelector('#login form')
     const watchlistLink = document.getElementById('watchlistLink')
 

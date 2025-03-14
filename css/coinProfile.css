@@ -16,16 +16,21 @@ nav{
     padding-left: 50%;
 }
 #navbarNavAltMarkup{
-    padding-left: 10%;
+    padding-left: 0%;
 }
-#logo{
+nav a img{
     padding-left: 45%;
+    max-width: 20rem !important;
+    width: auto;
 }
 
 @media (min-width:992px) {
     #logo{
         padding-left: 0%;
+
     }
+
+
 }
 /*  */
 
